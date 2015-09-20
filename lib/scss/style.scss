@@ -1,0 +1,105 @@
+@charset "utf-8";
+$fontSize:16px;
+.clearfix {
+    &::after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+}
+/* body */
+body {
+    margin: 0; padding: 0;
+    font: normal $fontSize "Microsoft Yahei";
+    background-color: #d9d9d9;
+}
+/* header start {*/
+header {
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    width: 320px;
+}
+.nav-bar {
+    float: left;
+    width: 260px;
+    height: 100%;
+    background-color: #e84c3d;
+}
+.face-area {
+    height: 260px;
+    text-align: center;
+    background: url(../img/circular_shadow.png) center top no-repeat;
+
+    > img {
+        width: 130px;height: 130px;
+        margin-top: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    > div {
+        margin-top: 15px;
+        color: #fff; font: normal 24px / 30px "Microsoft Yahei";
+        text-shadow: 2px 2px 1px rgba(0,0,0,.5);
+    }
+}
+.search-area {
+    position: relative;
+    text-align: center;
+    input[type=search] {
+        width: 220px; height: 30px;
+        padding: 0 36px 0 10px;
+        border-radius: 15px; border: none; outline: none;
+    }
+    input[type=button] {
+        position: absolute;
+        left: 210px; top: 2px;
+        width: 25px; height: 25px;
+        border-radius: 50%; border: none; outline: none;
+        background: url(../img/search_icon.png) center #e84c3d;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+.function-area {
+    position: relative;
+    width: 220px;
+    margin: 30px auto;
+    text-align: center;
+    color: #fff; font-size: $fontSize * .75;
+
+    $liHeight: 20px;
+    ul {
+        position: absolute;
+        width: 100%;
+        margin: 0 ; padding: 0;
+        z-index: 2;
+        list-style: none;
+
+        li {
+            height: $liHeight; line-height: $liHeight;
+            margin: 15px 0 0;
+            font-size: $fontSize * .75;
+            cursor: pointer;
+        }
+    }
+    .current {
+        position: absolute;
+        top: 15px; z-index: 1;
+        width: 100%; height: $liHeight;
+        margin: 0;
+        border-radius: 10px;
+        background-color: #000;
+    }
+}
+.icon-bar {
+    float: left;
+    width: 60px;
+    height: 100%;
+    background-color: #262626;
+}
+/* header end }*/
+
+.container {
+    padding: 20px 340px 20px 20px;
+}
