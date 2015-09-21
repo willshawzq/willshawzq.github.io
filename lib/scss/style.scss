@@ -1,5 +1,50 @@
 @charset "utf-8";
 $fontSize:16px;
+@mixin transition($param) {
+    -webkit-transition: $param;
+    -moz-transition: $param;
+    -o-transition: $param;
+    transition: $param;
+}
+@mixin transform($param) {
+    -webkit-transform: $param;
+    -moz-transform: $param;
+    -o-transform: $param;
+    transform: $param;
+}
+@mixin animation($param) {
+    -webkit-animation: $param;
+    -moz-animation: $param;
+    -o-animation: $param;
+    animation: $param;
+}
+@-webkit-keyframes pudding {
+    0% {@include transform(scale(1.2, .8));}
+    5% {@include transform(scale(1.15, .85));}
+    10% {@include transform(scale(1.15, .85));}
+    15% {@include transform(scale(1.1, .9));}
+    20% {@include transform(scale(1.05, .95));}
+    25% {@include transform(scale(1, 1));}
+    30% {@include transform(scale(.95, 1.05));}
+    35% {@include transform(scale(.9, 1.1));}
+    40% {@include transform(scale(.85, 1.15));}
+    45% {@include transform(scale(.9, 1.1));}
+    50% {@include transform(scale(1, 1));}
+}
+@keyframes pudding {
+    0% {@include transform(scale(1.2, .8));}
+    5% {@include transform(scale(1.15, .85));}
+    10% {@include transform(scale(1.15, .85));}
+    15% {@include transform(scale(1.1, .9));}
+    20% {@include transform(scale(1.05, .95));}
+    25% {@include transform(scale(1, 1));}
+    30% {@include transform(scale(.95, 1.05));}
+    35% {@include transform(scale(.9, 1.1));}
+    40% {@include transform(scale(.85, 1.15));}
+    45% {@include transform(scale(.9, 1.1));}
+    50% {@include transform(scale(1, 1));}
+}
+
 .clearfix {
     &::after {
         display: block;
@@ -8,6 +53,7 @@ $fontSize:16px;
     }
 }
 /* body */
+* {margin: 0; padding: 0;}
 body {
     margin: 0; padding: 0;
     font: normal $fontSize "Microsoft Yahei";
@@ -35,6 +81,10 @@ header {
         margin-top: 35px;
         border-radius: 50%;
         cursor: pointer;
+        @include transition(all .6s ease-in-out);
+        &:hover {
+            @include transform(rotate(360deg));
+        }
     }
     > div {
         margin-top: 15px;
@@ -56,8 +106,10 @@ header {
         width: 25px; height: 25px;
         border-radius: 50%; border: none; outline: none;
         background: url(../img/search_icon.png) center #e84c3d;
+        @include transition(background .3s ease-out);
         &:hover {
             cursor: pointer;
+            @include animation(pudding .3s ease-out);
         }
     }
 }
@@ -72,7 +124,6 @@ header {
     ul {
         position: absolute;
         width: 100%;
-        margin: 0 ; padding: 0;
         z-index: 2;
         list-style: none;
 
@@ -83,13 +134,14 @@ header {
             cursor: pointer;
         }
     }
-    .current {
+    .func-current {
         position: absolute;
         top: 15px; z-index: 1;
         width: 100%; height: $liHeight;
         margin: 0;
         border-radius: 10px;
         background-color: #000;
+        @include transition(top .8s);
     }
 }
 .icon-bar {
@@ -97,6 +149,48 @@ header {
     width: 60px;
     height: 100%;
     background-color: #262626;
+    ul {
+        width: 35px;
+        margin: 0 auto;
+        color: #fff; font-size: $fontSize * .875;
+        list-style: none;
+        li {
+            position: relative;
+            height: 35px;
+            margin-top: 15px;
+            cursor: pointer;
+            background-image: url(../img/icon_dark.png);
+            @include transition(all .3s);
+            span {
+                position: absolute;
+                left: 150%;
+                width: 100px;
+                padding: 5px 10px;
+                border-radius: 4px;
+                visibility: hidden;
+                background-color: #262626;
+            }
+            &:hover {
+                background-image: url(../img/icon_light.png);
+                @include transform(rotate(360deg));
+                span {
+                    visibility: visible;
+                }
+            }
+            &.icon-github {
+                background-position: 0 -35px;
+            }
+            &.icon-qq {
+                background-position: 0 -70px;
+            }
+            &.icon-wechat {
+                background-position: 0 -140px;
+            }
+            &.icon-category {
+                background-position: 0 -105px;
+            }
+        }
+    }
 }
 /* header end }*/
 
