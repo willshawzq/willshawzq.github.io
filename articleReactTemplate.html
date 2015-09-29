@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article template</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+</head>
+<body>
+<div id="content"></div>
+<script type="text/jsx">
+    var Article = React.createClass({
+        render: function() {
+            var data = this.props.data;
+            return (
+                    <div className="article-list">
+                        <article className="article">
+                            <h1>{data.author}</h1>
+                            <p>{data.content}</p>
+                            <div>
+                                <span className="post-date">{data.postDate}</span>
+                                <span className="article-type">{data.type}</span>
+                                <a href="#" className="readmore">{data.action}</a>
+                            </div>
+                        </article>
+                    </div>
+            );
+        }
+    });
+    var ArticleList = React.createClass({
+        loadArticleListFormServer: function() {
+            $.ajax({
+                url: this.props.url,
+                dataType: "json",
+                cache: false,
+                success: function(data) {
+                    this.setState({data: data});
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    console.error(this.props.url, status, err.toString());
+                }.bind(this)
+            });
+        },
+        getInitialState: function() {
+            return {data: []};
+        },
+        componentDidMount: function() {
+            this.loadArticleListFormServer();
+        },
+       render: function() {
+           var articleNodes = this.state.data.map(function(article) {
+              return (
+                      <Article data={article} />
+              );
+           });
+           return (
+                   <div className="article-list">
+                       {articleNodes}
+                   </div>
+           );
+       }
+    });
+    React.render(
+            <ArticleList url="data.json"></ArticleList>,
+            document.querySelector("#content")
+    );
+</script>
+</body>
+</html>
