@@ -1,0 +1,406 @@
+.warp {
+    width: 300px;
+    margin: 200px auto;
+}
+.minions {
+    position: relative;
+}
+
+.minions .hairs {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.minions .left-hairs,
+.minions .right-hairs,
+.minions .left-hairs::before,
+.minions .right-hairs::after {
+    position: absolute;
+    top: -10px;
+    display: block;
+    content: "";
+    width: 150px;
+    height: 100px;
+    border-radius: 50%;
+    border-top: 5px solid;
+}
+.minions .left-hairs {
+    left: 25px;
+    transform: rotate(30deg);
+    -webkit-animation: leftHairs 2s ease-in-out infinite;
+}
+.minions .right-hairs {
+    right: 56px;
+    transform: rotate(-30deg);
+    -webkit-animation: rightHairs 2s ease-in-out infinite;
+}
+.minions .left-hairs::before {
+    left: -5px;
+    top: -9px;
+    transform: rotate(15deg);
+}
+.minions .right-hairs::after {
+    right: -5px;
+    top: -9px;
+    transform: rotate(-15deg);
+}
+@-webkit-keyframes leftHairs {
+    0%, 25%, 51%, 100% {}
+    50% {transform: rotate(35deg);}
+}
+@-webkit-keyframes rightHairs {
+    0%, 25%, 51%, 100% {}
+    50% {transform: rotate(-35deg);}
+}
+
+.minions .body {
+    position: absolute;
+    width: 240px;
+    height: 400px;
+    z-index: 2;
+    padding: 5px;
+    overflow: hidden;
+    border: 5px solid #000;
+    border-radius: 115px;
+    background-color: rgb(249,217,70);
+}
+
+.minions .eyes {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+.minions .left-eye,
+.minions .right-eye {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid #000;
+    background-color: #fff;
+}
+.minions .left-eye {
+    left: calc(50% - 90px);
+}
+.minions .right-eye {
+    right: calc(50% - 90px);
+}
+.minions .left-eye::before,
+.minions .right-eye::after {
+    position: absolute;
+    top: 35%;
+    display: block;
+    content: "";
+    width: 22px;
+    border: 10px solid #000;
+}
+.minions .left-eye::before {
+    right: 101%;
+    transform: skew(20deg) rotate(20deg);
+}
+.minions .right-eye::after {
+    left: 101%;
+    transform: skew(-20deg) rotate(-20deg);
+}
+.minions .eye-ball {
+    position: absolute;
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #000;
+    -webkit-animation: blackBall 5s ease-out infinite;
+}
+@-webkit-keyframes blackBall {
+    0%,20%,50%,70%,100%{
+        transform: translateX(0px);
+    }
+    30%,40%{
+        transform: translateX(15px);
+    }
+    80%,90%{
+        transform: translateX(-15px);
+    }
+}
+.minions .eye-ball::after {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: 5px;
+    display: block;
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    -webkit-animation: whiteBall 5s ease-out infinite;
+}
+@-webkit-keyframes whiteBall {
+    0%, 20%, 50%, 70%, 100% {
+        transform: translateX(0);
+    }
+    30%, 40% {
+        transform: translate(10px, 4px);
+    }
+    80%, 90% {
+        transform: translate(4px, 4px);
+    }
+}
+.minions .mouse {
+    position: absolute;
+    top: 164px;
+    left: 112px;
+    width: 50px;
+    height: 30px;
+    border: 5px solid #000;
+    border-bottom-left-radius: 30px;
+    transform: rotate(-50deg);
+    background-color: #fff;
+    -webkit-animation: mouse 5s ease-in-out infinite;
+}
+.minions .mouse::before {
+    position: absolute;
+    top: -15px;
+    left: -1px;
+    display: block;
+    content: "";
+    width: 70px;
+    height: 29px;
+    border-bottom: 5px solid #000;
+    transform: rotate(30deg);
+    background-color: rgb(249, 217, 70);
+    -webkit-animation: mouseTop 5s ease-in-out infinite;
+}
+@-webkit-keyframes mouse {
+    0%, 40%, 50%, 100% {
+        height: 29px;
+    }
+    45%, 48% {
+        height: 25px;
+    }
+}
+@-webkit-keyframes mouseTop {
+    0%, 40%, 50%, 100% {
+        top: -15px;
+        width: 70px;
+        height: 29px;
+    }
+    45%, 48% {
+        top: -22px;
+        width: 67px;
+        height: 34px;
+    }
+}
+
+.minions .hands {
+    position: absolute;
+    top: 256px;
+    width: 100%;
+}
+.minions .left-hand,
+.minions .right-hand {
+    position: absolute;
+    top: -41px;
+    width: 80px;
+    height: 80px;
+    border-radius: 25px;
+    border: 5px solid #000;
+    background-color: rgb(249, 217, 70);
+}
+.minions .left-hand {
+    left: -31px;
+    transform: rotate(40deg);
+    -webkit-animation: leftHand .8s ease infinite;
+}
+.minions .right-hand {
+    right: 10px;
+    transform: rotate(-40deg);
+    -webkit-animation: rightHand .8s ease infinite;
+}
+.minions .left-hand::before,
+.minions .right-hand::before {
+    position: absolute;
+    top: 43px;
+    display: block;
+    content: "";
+    width: 20px;
+    border: 3px solid #000;
+    border-radius: 3px;
+    transform: rotate(90deg);
+}
+.minions .left-hand::before {
+    left: 13px;
+}
+.minions .right-hand::before {
+    right: 13px;
+}
+@-webkit-keyframes leftHand {
+    0%, 50%, 100% {}
+    30% {
+        transform: rotate(35deg);
+        left: -29px;
+    }
+}
+@-webkit-keyframes rightHand {
+    0%, 50%, 100% {}
+    30% {
+        transform: rotate(-45deg);
+        right: 8px;
+    }
+}
+
+.minions .pants {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 110px;
+    border-top: 5px solid #000;
+    background-color: rgb(32,116,160);
+}
+.minions .pants::before {
+    display: block;
+    content: "";
+    width: 170px;
+    height: 60px;
+    margin: -65px auto 0;
+    border: 5px solid #000;
+    border-bottom: none;
+    background-color: rgb(32,116,160);
+}
+
+.minions .left-baldric,
+.minions .right-baldric {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 100px;
+    height: 15px;
+    border: 5px solid #000;
+    background-color: rgb(32,116,160);
+}
+.minions .left-baldric {
+    left: -31px;
+    transform: rotate(50deg);
+}
+.minions .right-baldric {
+    right: -31px;
+    transform: rotate(-50deg);
+}
+.minions .left-baldric::before,
+.minions .right-baldric::before {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    content: "";
+    width: 8px;
+    height: 8px;
+    margin-left: 4px;
+    border-radius: 50%;
+    background-color: #000;
+}
+.minions .left-baldric::before {
+    float: right;
+    margin-right: 4px;
+}
+
+.minions .pocket {
+    position: absolute;
+    top: -25px;
+    left: calc(50% - 30px);
+    width: 60px;
+    height: 50px;
+    border: 5px solid #000;
+    border-radius: 0 0 25px 25px;
+}
+
+.minions .left-pocket,
+.minions .right-pocket {
+    position: absolute;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    border-bottom: 5px solid #000;
+}
+.minions .left-pocket {
+    left: 0;
+    transform: rotate(10deg);
+    border-right: 5px solid #000;
+    border-bottom-right-radius: 50px;
+}
+.minions .right-pocket {
+    right: 0;
+    transform: rotate(-10deg);
+    border-left: 5px solid #000;
+    border-bottom-left-radius: 50px;
+}
+
+.minions .pants-line {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 40px;
+    border-radius: 3px;
+    border: 3px solid #000;
+}
+
+.minions .feet {
+    position: absolute;
+    top: 410px;
+    width: 100%;
+}
+.minions .left-foot,
+.minions .right-foot {
+    position: absolute;
+    top: 0;
+    left: 93px;
+    height: 50px;
+    width: 36px;
+    background: #000;
+}
+.minions .left-foot {
+    -webkit-transform-origin: right top;
+    -webkit-animation: leftFoot .8s ease-in-out infinite;
+}
+.minions .right-foot {
+    left: 136px;
+    -webkit-transform-origin: left top;
+    -webkit-animation: rightFoot .8s ease-in-out infinite;
+}
+.minions .left-foot::before,
+.minions .right-foot::after {
+    position: absolute;
+    bottom: -15px;
+    display: block;
+    content: "";
+    width: 70px;
+    height: 35px;
+    background: #000;
+}
+.minions .left-foot::before {
+    right: 0;
+    border-radius: 18px 0 8px 18px;
+}
+.minions .right-foot::after {
+    border-radius: 0 18px 18px 8px;
+}
+@-webkit-keyframes leftFoot {
+    0%, 50%, 100% {
+        transform: rotate(0deg);
+    }
+    30% {
+        transform: rotate(10deg);
+    }
+}
+@-webkit-keyframes rightFoot {
+    0%, 50%, 100% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(-10deg);
+    }
+}

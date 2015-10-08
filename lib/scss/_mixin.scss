@@ -1,0 +1,11 @@
+@charset "utf-8";
+$fontSize:16px;
+@mixin transition($param) {
+  transition: $param;
+}
+@mixin transform($param) {
+  transform: $param;
+}
+@mixin animation($param) {
+  animation: $param;
+}

@@ -1,23 +1,5 @@
-@charset "utf-8";
-$fontSize:16px;
-@mixin transition($param) {
-    -webkit-transition: $param;
-    -moz-transition: $param;
-    -o-transition: $param;
-    transition: $param;
-}
-@mixin transform($param) {
-    -webkit-transform: $param;
-    -moz-transform: $param;
-    -o-transform: $param;
-    transform: $param;
-}
-@mixin animation($param) {
-    -webkit-animation: $param;
-    -moz-animation: $param;
-    -o-animation: $param;
-    animation: $param;
-}
+@import "mixin";
+
 @-webkit-keyframes pudding {
     0% {@include transform(scale(1.2, .8));}
     5% {@include transform(scale(1.15, .85));}
@@ -96,7 +78,7 @@ header {
     position: relative;
     text-align: center;
     input[type=search] {
-        width: 220px; height: 30px;
+        width: 174px; height: 30px;
         padding: 0 36px 0 10px;
         border-radius: 15px; border: none; outline: none;
     }
@@ -124,6 +106,7 @@ header {
     ul {
         position: absolute;
         width: 100%;
+        margin: 0; padding: 0;
         z-index: 2;
         list-style: none;
 
@@ -151,7 +134,7 @@ header {
     background-color: #262626;
     ul {
         width: 35px;
-        margin: 0 auto;
+        margin: 0 auto; padding: 0;
         color: #fff; font-size: $fontSize * .875;
         list-style: none;
         li {
@@ -195,5 +178,5 @@ header {
 /* header end }*/
 
 .container {
-    padding: 20px 340px 20px 20px;
+    padding: 20px 20px 20px 340px;
 }
