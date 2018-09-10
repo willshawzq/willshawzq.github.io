@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="我们在做前端缓存的时候，都会想办法把我们的代码文件给缓存起来，提供我们页面的加载速度，同时也降低了我们的宽带压力。 那如果我们的HTML也被缓存了呢？对于那些长期不更新的页面没什么问题，但是我们的定期更新的功能页，一旦页面被缓存，那拉取的文件也必将是老文件。我在做客户端内嵌项目时，就遇到页面被缓存的情况。 判断页面是否从缓存读取在HTML5中有一个PageTransitionEvent接口，它会在">
+<meta name="description" content="我们在做前端缓存的时候，都会想办法把我们的代码文件给缓存起来，提供我们页面的加载速度，同时也降低了我们的宽带压力。 那如果我们的HTML也被缓存了呢？对于那些长期不更新的页面没什么问题，但是我们的定期更新的功能页，一旦页面被缓存，那拉取的文件也必将是老文件。我在做客户端内嵌项目时，就遇到页面被缓存的情况。">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="页面缓存问题">
 <meta property="og:url" content="http://yoursite.com/2018/08/11/persisted/index.html">
 <meta property="og:site_name" content="WillShaw">
-<meta property="og:description" content="我们在做前端缓存的时候，都会想办法把我们的代码文件给缓存起来，提供我们页面的加载速度，同时也降低了我们的宽带压力。 那如果我们的HTML也被缓存了呢？对于那些长期不更新的页面没什么问题，但是我们的定期更新的功能页，一旦页面被缓存，那拉取的文件也必将是老文件。我在做客户端内嵌项目时，就遇到页面被缓存的情况。 判断页面是否从缓存读取在HTML5中有一个PageTransitionEvent接口，它会在">
+<meta property="og:description" content="我们在做前端缓存的时候，都会想办法把我们的代码文件给缓存起来，提供我们页面的加载速度，同时也降低了我们的宽带压力。 那如果我们的HTML也被缓存了呢？对于那些长期不更新的页面没什么问题，但是我们的定期更新的功能页，一旦页面被缓存，那拉取的文件也必将是老文件。我在做客户端内嵌项目时，就遇到页面被缓存的情况。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/08/11/persisted/persisted/1.png">
-<meta property="og:updated_time" content="2018-09-10T08:32:41.391Z">
+<meta property="og:updated_time" content="2018-09-10T08:40:41.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面缓存问题">
-<meta name="twitter:description" content="我们在做前端缓存的时候，都会想办法把我们的代码文件给缓存起来，提供我们页面的加载速度，同时也降低了我们的宽带压力。 那如果我们的HTML也被缓存了呢？对于那些长期不更新的页面没什么问题，但是我们的定期更新的功能页，一旦页面被缓存，那拉取的文件也必将是老文件。我在做客户端内嵌项目时，就遇到页面被缓存的情况。 判断页面是否从缓存读取在HTML5中有一个PageTransitionEvent接口，它会在">
+<meta name="twitter:description" content="我们在做前端缓存的时候，都会想办法把我们的代码文件给缓存起来，提供我们页面的加载速度，同时也降低了我们的宽带压力。 那如果我们的HTML也被缓存了呢？对于那些长期不更新的页面没什么问题，但是我们的定期更新的功能页，一旦页面被缓存，那拉取的文件也必将是老文件。我在做客户端内嵌项目时，就遇到页面被缓存的情况。">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/11/persisted/persisted/1.png">
 
 
@@ -356,6 +356,7 @@
       
         <p>我们在做前端缓存的时候，都会想办法把我们的代码文件给缓存起来，提供我们页面的加载速度，同时也降低了我们的宽带压力。</p>
 <p>那如果我们的HTML也被缓存了呢？对于那些长期不更新的页面没什么问题，但是我们的定期更新的功能页，一旦页面被缓存，那拉取的文件也必将是老文件。我在做客户端内嵌项目时，就遇到页面被缓存的情况。</p>
+<a id="more"></a>
 <h2 id="判断页面是否从缓存读取"><a href="#判断页面是否从缓存读取" class="headerlink" title="判断页面是否从缓存读取"></a>判断页面是否从缓存读取</h2><p>在HTML5中有一个<strong>PageTransitionEvent</strong>接口，它会在一条历史记录被执行的时候触发<code>pageshow</code>事件。也就是说类似于我们点击前进/后退按钮的操作时，也会在<code>onload</code>事件触发后页面初始化时触发。</p>
 <p>那我们在页面中加入监听代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onpageshow = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(event)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
