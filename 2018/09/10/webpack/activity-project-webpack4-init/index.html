@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端 webpack," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近在做活动开发，因为用的是全新的域名，原先的活动开发体系也就不能用了。借此机会我也刚好用webpack4来重新搭建一个活动开发的项目，随便把自己的一个想法实践一下。">
+<meta name="keywords" content="前端 webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零构建活动项目webpack4配置(一)">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/index.html">
+<meta property="og:site_name" content="WillShaw">
+<meta property="og:description" content="最近在做活动开发，因为用的是全新的域名，原先的活动开发体系也就不能用了。借此机会我也刚好用webpack4来重新搭建一个活动开发的项目，随便把自己的一个想法实践一下。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/activity-project-webpack4-init/1.png">
+<meta property="og:updated_time" content="2018-09-11T08:35:53.227Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从零构建活动项目webpack4配置(一)">
+<meta name="twitter:description" content="最近在做活动开发，因为用的是全新的域名，原先的活动开发体系也就不能用了。借此机会我也刚好用webpack4来重新搭建一个活动开发的项目，随便把自己的一个想法实践一下。">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/activity-project-webpack4-init/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/"/>
+
+
+
+
+
+  <title>从零构建活动项目webpack4配置(一) | WillShaw</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">WillShaw</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Will Shaw">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/7007063?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WillShaw">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">从零构建活动项目webpack4配置(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T19:42:59+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><br>最近在做活动开发，因为用的是全新的域名，原先的活动开发体系也就不能用了。借此机会我也刚好用<code>webpack4</code>来重新搭建一个活动开发的项目，随便把自己的一个想法实践一下。</p>
+<a id="more"></a>
+<h3 id="活动项目的特点"><a href="#活动项目的特点" class="headerlink" title="活动项目的特点"></a>活动项目的特点</h3><p>运营类的活动比较多，而且相互之间的关系并不大，因此往往我们会按照年份和不同的产品进行目录划分。</p>
+<p>同时每个活动会用一个单独的文件夹作为入口，一则方便代码管理，二则也同时确定了活动的访问路径。</p>
+<p>原先的运营活动PC端和WAP端页面是分放在<code>PC</code>和<code>WAP</code>两个大的分类下的，<strong>下面再按照年份和产品进行了区分</strong>。这里有一个问题就是：很多活动都是同时有<code>PC</code>和<code>WAP</code>的，两者主题的业务逻辑是一样的，不同的只有展示效果和部分交互逻辑，分放两份的话一来代码重复，而来修改问题时同时要改两个部分，这其实还是不够方便的。</p>
+<p>因此我最终的目录划分确定为：</p>
+<p><img src="/2018/09/10/webpack/activity-project-webpack4-init/./activity-project-webpack4-init/1.png" alt=""></p>
+<p>每个活动目录下都会有一个<code>template</code>目录来放置重构文件，我们开发的业务逻辑将全部放置到<code>src</code>下，这样我们业务代码和重构代码就完全分离开了。每当重构文件有更新的时候，配合上公司同事开发的重构文件同步插件就能一键完成重构文件更新，同时不会影响到我们的业务代码。</p>
+<h3 id="空项目创建"><a href="#空项目创建" class="headerlink" title="空项目创建"></a>空项目创建</h3><p>第一步常规操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure></p>
+<p>初始化项目后，我们首先要安装的就是<code>webpack</code>，现在4.X版本<code>webpack-cli</code>已经独立出来了，要单独安装：<br>    yarn add -D webpack webpack-cli</p>
+<p>在安装好这两个依赖之后，其实我们就可以跑起来了：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "dev": "webpack --mode development",</span><br><span class="line">  "build": "webpack --mode production"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>webpack4</code>中加入了<strong>mode</strong>配置项，它值有<code>development</code>和<code>production</code>两种，分别表示开发环境和运行环境。运行上面两个终端命令就能立马可以开始开发了。</p>
+<p>当然现在这是默认的零配置开发，默认的入口文件是<code>src/index.js</code>。而我们的目录结构不是这样的，并且开发环境我们肯定是需要<code>webpack-dev-server</code>来启动服务和热更新的。因此我们需要写自己的自定义配置来满足我们的需求。</p>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>以下是配置只写了主要内容，有些东西省略了：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line"><span class="keyword">const</span> isProd = process.env.NODE_ENV === <span class="string">'production'</span></span><br><span class="line"><span class="comment">// 这里是用来确定当前活动需要做哪些平台</span></span><br><span class="line"><span class="keyword">const</span> entries = (<span class="function"><span class="keyword">function</span>(<span class="params">platform</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (platform === <span class="string">'all'</span>) <span class="keyword">return</span> [<span class="string">'pc'</span>, <span class="string">'wap'</span>]</span><br><span class="line">  <span class="keyword">return</span> [platform]</span><br><span class="line">&#125;(process.env.platform))</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// 根据传入的环境变量来确定mode值</span></span><br><span class="line">  mode: isProd ? <span class="string">'production'</span> : <span class="string">'development'</span>,</span><br><span class="line">  <span class="comment">// 根据要做平台来指定入口文件</span></span><br><span class="line">  entry: entries.reduce(<span class="function">(<span class="params">p, c</span>) =&gt;</span> &#123;</span><br><span class="line">    p[c] = <span class="string">`./src/<span class="subst">$&#123;c&#125;</span>/index.js`</span></span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line">  &#125;, &#123;&#125;),</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'./dist'</span>),</span><br><span class="line">    filename: isProd ? <span class="string">'[name]/build.[chunkHash:8].js'</span> : <span class="string">'[name]/build.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [...]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    <span class="comment">// 根据要做平台来生成活动页面</span></span><br><span class="line">    ...entries.map(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">        filename: <span class="string">`./<span class="subst">$&#123;e&#125;</span>/index.html`</span>,</span><br><span class="line">        template: <span class="string">`./template/<span class="subst">$&#123;e&#125;</span>/index.html`</span>,</span><br><span class="line">        inject: <span class="literal">true</span>,</span><br><span class="line">        chunks: [e]</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    port: <span class="number">80</span>, <span class="comment">// 在Mac上如果端口号小于1024，就需要用管理员权限启动项目</span></span><br><span class="line">    disableHostCheck: <span class="literal">true</span>, <span class="comment">// 开发时如果将网址host改为127.0.0.1，需要将该配置项设为true</span></span><br><span class="line">    ......</span><br><span class="line">  &#125;,</span><br><span class="line">  ......</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>此时在控制台输入</p>
+<pre><code>cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js
+</code></pre><p>项目启动之后，我们通过浏览器访问<a href="http://localhost/pc" target="_blank" rel="noopener">localhost/pc</a>，会发现我们的页面上所有的文件加载都报404。我们查看控制台可以发现所有的文件加载路径全部都相对于我们项目根路径去了，这样自然就加载不到文件。</p>
+<p>那问题就来了，我们不可能去修改重构稿里每个资源引用的路径。又因为存在两个平台的活动同时开发的情况，所以修改服务器启动的<code>contentBase</code>也不是一个好的选择。</p>
+<p>这个时候我考虑一种情况就是：我们在发布活动时，会将文件全部都打包到当前项目的<code>dist</code>文件夹下，重构用到的所有的资源也都会拷贝到<code>dist</code>目录下，那是不是可以在开发态时也将文件拷贝到dist下，这样访问时也刚好和生产环境是一样的路径。于是我在<code>plugins</code>下加上了拷贝文件的插件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> CopyWebpackPlugin(entries.map(<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="comment">// 因为输出文件夹指向的是dist，所以to这里就根路径就是dist了</span></span><br><span class="line">    <span class="keyword">from</span>: <span class="string">`./template/<span class="subst">$&#123;e&#125;</span>/`</span>, <span class="attr">to</span>: <span class="string">`./<span class="subst">$&#123;e&#125;</span>/`</span>, <span class="attr">force</span>: <span class="literal">true</span>, <span class="attr">toType</span>: <span class="string">'dir'</span>, <span class="attr">ignore</span>: [<span class="string">'index.js'</span>, <span class="string">'*.html'</span>, <span class="string">'*.tpl'</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)),</span><br></pre></td></tr></table></figure>
+<p>这个时候我们再运行启动开发环境，却发现项目下并不会生成<code>dist</code>文件夹，拷贝动作根本没有生效。我们都知道启动<code>webpack-dev-server</code>之后，我们的HTML和生成的JS文件都是存储在内存中的，同理开发态下<code>CopyWebpackPlugin</code>把文件也都拷贝到内存中去了，我们在资源访问路径中加入<code>pc|wap</code>文件夹路径就能访问到了。但这样一来还是不能解决我的问题。于是我就开始了寻找，最终我在<br><a href="https://github.com/webpack-contrib/copy-webpack-plugin" target="_blank" rel="noopener">copy-webpack-plugin</a><br>描述中看到这样一句话：</p>
+<pre><code>If you want webpack-dev-server to write files to the output directory during development, you can force it with the write-file-webpack-plugin.
+</code></pre><p>就是说如果我们用<code>webpack-dev-server</code>启动项目后，如果想把文件从内存写入到我们的<code>output</code>文件夹，我们可以通过<br><a href="https://github.com/gajus/write-file-webpack-plugin" target="_blank" rel="noopener">write-file-webpack-plugin</a><br>这个插件来实现。</p>
+<p>于是当我在<code>plugins</code>中加上：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> WriteFilePlugin()</span><br></pre></td></tr></table></figure></p>
+<p>启动开发环境，项目中如期的写入了<code>dist</code>文件夹，所有的重构文件、原本在内存中的HTML和<code>build.js</code>都出现了。这个时候访问<a href="http://localhost/dist/pc" target="_blank" rel="noopener">localhost/dist/pc</a>就能正常访问了。</p>
+<h4 id="npm-script-改造"><a href="#npm-script-改造" class="headerlink" title="npm script 改造"></a>npm script 改造</h4><p>完成了配置文件的编写之后，我们回过头来看看<code>package.json</code>中的<code>scripts</code>：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">  "dev": "cross-env NODE_ENV=development platform=pc webpack-dev-server --config webpack.config.js"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们是通过<code>cross-env</code>来对<code>NODE_ENV</code>和<code>platform</code>的值进行设置的，这样语句就变得很长不方便查看和维护。<br>这里我推荐用<a href="https://www.npmjs.com/package/better-npm-run" target="_blank" rel="noopener">better-npm-run</a>来优化一下书写体验：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">"script": &#123;</span><br><span class="line">  "dev:pc": "better-npm-run dev:pc",</span><br><span class="line">  "build:pc": "better-npm-run build:pc",</span><br><span class="line">&#125;,</span><br><span class="line">"betterScripts": &#123;</span><br><span class="line">  "dev:pc": &#123;</span><br><span class="line">    "command": "webpack-dev-server --config webpack.config.js",</span><br><span class="line">    "env": &#123;</span><br><span class="line">      "NODE_ENV": "development",</span><br><span class="line">      "platform": "pc" // 这个参数我们用来在配置文件中进行入口判断</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  "build:pc": &#123;</span><br><span class="line">    "command": "webpack --config webpack.config.js --progress --hide-modules",</span><br><span class="line">    "env": &#123;</span><br><span class="line">      "NODE_ENV": "production",</span><br><span class="line">      "platform": "pc"</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样一来我们可以列举3种情况来区分执行不同的开发和打包命令了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端-webpack/" rel="tag"><i class="fa fa-tag"></i> 前端 webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/11/web-cache/persisted/" rel="next" title="页面缓存问题">
+                <i class="fa fa-chevron-left"></i> 页面缓存问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars2.githubusercontent.com/u/7007063?s=460&v=4"
+                alt="Will Shaw" />
+            
+              <p class="site-author-name" itemprop="name">Will Shaw</p>
+              <p class="site-description motion-element" itemprop="description">努力奔跑的码农</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/willshawzq" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动项目的特点"><span class="nav-number">1.</span> <span class="nav-text">活动项目的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空项目创建"><span class="nav-number">2.</span> <span class="nav-text">空项目创建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#npm-script-改造"><span class="nav-number">2.2.</span> <span class="nav-text">npm script 改造</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Will Shaw</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
