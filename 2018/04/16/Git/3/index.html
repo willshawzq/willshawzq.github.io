@@ -87,19 +87,19 @@
 <meta property="og:site_name" content="WillShaw">
 <meta property="og:description" content="目前当我们在开发结束要发版时，我们要将我们开发分支并入到主分支中，然后再让测试在预发布环境测试。预发布环境测试有时会发现新的问题，因此经常在主分支上有bug修复的额外提交，这其实有碍整洁。 要将自己的开发分支并入主分支有两种方式，一种就是直接合并一种就是变基了。 上篇中我们的分支结构图是这样的：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_comit2.png">
-<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_merge.png">
-<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_pull.png">
-<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_merge2.png">
-<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_pull2.png">
-<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_pull.png">
-<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_rebase.png">
-<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_rebase2.png">
-<meta property="og:updated_time" content="2018-09-11T08:50:26.660Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/git_comit2.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/git_merge.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/git_pull.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/git_merge2.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/git_pull2.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/git_pull.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/git_rebase.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/Git/3/git_rebase2.png">
+<meta property="og:updated_time" content="2018-09-11T08:57:37.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rebase VS merge">
 <meta name="twitter:description" content="目前当我们在开发结束要发版时，我们要将我们开发分支并入到主分支中，然后再让测试在预发布环境测试。预发布环境测试有时会发现新的问题，因此经常在主分支上有bug修复的额外提交，这其实有碍整洁。 要将自己的开发分支并入主分支有两种方式，一种就是直接合并一种就是变基了。 上篇中我们的分支结构图是这样的：">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/16/Git/3/2/git_comit2.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/16/Git/3/git_comit2.png">
 
 
 
@@ -365,14 +365,14 @@
 <p>要将自己的开发分支并入主分支有两种方式，一种就是直接合并一种就是变基了。</p>
 <p>上篇中我们的分支结构图是这样的：</p>
 <a id="more"></a>
-<p><img src="/2018/04/16/Git/3/2/git_comit2.png" alt="git_commit2"></p>
+<p><img src="/2018/04/16/Git/3/git_comit2.png" alt="git_commit2"></p>
 <p>现在有两种情况我们需要考量：</p>
 <ol>
 <li>远端<strong>master</strong>没有其他人更新过，本地和远端<strong>master</strong>依旧指向A3节点；</li>
 <li>远端<strong>master</strong>已经被其他人更新了，本地和远端指向节点已经不同了。</li>
 </ol>
 <h4 id="远端master未被更新"><a href="#远端master未被更新" class="headerlink" title="远端master未被更新"></a>远端master未被更新</h4><p>当远端主分支没有新的更新点的时候，我们直接切换到主分支进行合并命令：</p>
-<p><img src="/2018/04/16/Git/3/2/git_merge.png" alt="git_merge"></p>
+<p><img src="/2018/04/16/Git/3/git_merge.png" alt="git_merge"></p>
 <p>上面的输出我们可以看到上面有一句<strong>Fast-forward</strong>，这是因为当前主分支指向的提交点是我们分支检出后新第一个提交点的直接上游，所以<strong>Git</strong>只是将主分支的执政移动到我们最后一个提交点。也就是说当我们试图合并两个分支时，如果顺着一个分支走下去能够到达另一个分支，那么 Git 在合并两者的时候，只会简单的将指针向前推进（指针右移），因为这种情况下的合并操作没有需要解决的分歧——这就叫做Fast-forward。</p>
 <p>这个时候我们回顾一下我们变基的操作：</p>
 <ol start="0">
@@ -384,25 +384,25 @@
 </ol>
 <p>我们可以看到在没有远端没有更新的情况下，变基后合并与直接合并相差的就只有提交点的数量了，所以关键情况就是当远端出现更新的时候。</p>
 <h4 id="远端master有了新的提交点"><a href="#远端master有了新的提交点" class="headerlink" title="远端master有了新的提交点"></a>远端master有了新的提交点</h4><h4 id="使用合并"><a href="#使用合并" class="headerlink" title="使用合并"></a>使用合并</h4><p>我们首先也是先同步更新远端修改到本地：</p>
-<p><img src="/2018/04/16/Git/3/2/git_pull.png" alt="git_pull"></p>
+<p><img src="/2018/04/16/Git/3/git_pull.png" alt="git_pull"></p>
 <p>现在我们要进行合并的话，<strong>Git</strong>会根据共同祖先（A3）、主分支末端节点（C2）和特性分支末端节点（A7）进行三方合并。Git 将此次三方合并的结果做一个新的快照并且自动创建一个新的提交指向它。这个提交点的特别之处在于它有不止一个父提交。</p>
-<p><img src="/2018/04/16/Git/3/2/git_merge2.png" alt="git_merge2"></p>
+<p><img src="/2018/04/16/Git/3/git_merge2.png" alt="git_merge2"></p>
 <p>A8是合并后的共同节点，从它开始分支后保有了我们开发分支和其他人开发分支的功能代码。现在我们在主分支下打印log的话，这些节点信息会按照时间顺序由近到远的展示出来。这时我们考虑下，当我们遇到问题要进行代码回退时，是不是要回退到A3点，那C1和C2的代码是不是也同时被撤销了？</p>
 <p>PS：这里插一点，大家平时应该注意到了，我们通过<strong>git pull</strong>拉取代码时，往往会出现这样一个提交信息：</p>
-<p><img src="/2018/04/16/Git/3/2/git_pull2.png" alt="git_pull2"></p>
+<p><img src="/2018/04/16/Git/3/git_pull2.png" alt="git_pull2"></p>
 <p>这是因为<code>git pull</code>这条命令在帮我们<code>git fetch</code>获取了远端代码之后，它会自动尝试帮我们进行合并提交，只有出现冲突时，它才会停下来让我们处理。</p>
 <h4 id="使用变基"><a href="#使用变基" class="headerlink" title="使用变基"></a>使用变基</h4><p>我们再次回到我们现在的变基流程，我们变基之前都会进行一次重置操作，将多个提交点归结于一个提交点。那我们现在不这样做，直接变基会怎样呢？</p>
 <p>首先我们还是回到当前分支状态：</p>
-<p><img src="/2018/04/16/Git/3/2/git_pull.png" alt="git_pull"></p>
+<p><img src="/2018/04/16/Git/3/git_pull.png" alt="git_pull"></p>
 <p>我们在开发分支运行<code>git rebase master</code>，同样如果出现冲突了，停下来等我们解决冲突，解决完之后，打印log我们会看到这样的情况：</p>
-<p><img src="/2018/04/16/Git/3/2/git_rebase.png" alt="git_rebase"></p>
+<p><img src="/2018/04/16/Git/3/git_rebase.png" alt="git_rebase"></p>
 <p>我们的开发分支变成了这样，我们的提交点看似直接照搬接到了C2的后面，我们仔细看每个节点的名称变了（commit id）变了。它的原理是首先找到这两个分支（即当前分支、变基操作的目标基底分支 master）的最近共同祖先A3，然后对比当前分支相对于该祖先的历次提交，提取相应的修改并存为临时文件，然后将当前分支指向目标基底 C2, 最后以此将之前另存为临时文件的修改依序应用（创建新的提交点）。</p>
 <p>看当我们直接进行变基的时候，我们还是会把我们所有的提交点添加到我们的主分支master上，不过有一点好处是，不再会有那么多的分支岔路了，是一条直路通到底了。因此理论上说只要我们能记住我们每个功能的提交点或者每次我们都push了一个tag到远端仓库，那我们这种提交方式也是可以的应对的回退某一个功能的情况的。那既然变基都做了，合并一个点这么一气呵成的操作为啥不做呢，顺便记录下我们的开发信息，也就能省掉每次创建一个tag了（大家都这么懒）。。。</p>
 <h5 id="rebase的一个坑"><a href="#rebase的一个坑" class="headerlink" title="rebase的一个坑"></a>rebase的一个坑</h5><p>讲到这一步，我们就有必要提一下我在<strong>变基指南</strong>里提到的另一种变基合成一点的操作了：</p>
 <pre><code>git rebase -i
 </code></pre><p>开发中也有童鞋用这个操作坑了自己一下。</p>
 <p>这个<code>rebase</code>命令可以让我们直接重写我们的提交历史，具体介绍参见那篇文章。但是既然是重写了我们的提交历史，那它的各个快照（snapshot）也就是节点就会受影响啊同志：</p>
-<p><img src="/2018/04/16/Git/3/2/git_rebase2.png" alt="git_rebase2"></p>
+<p><img src="/2018/04/16/Git/3/git_rebase2.png" alt="git_rebase2"></p>
 <p>我们通过<code>git rebase -i SHA</code>的方式合并成一个点之后，本地和远端的情况就变成了这样了。这时VSCode会跟你显示远端超前你4个版本，而你有一个新的提交点要提交了！这时你去同步会发生什么？很可能又会出现一个新的Merge点啊，一番骚操作之后你会发现：咦，我怎么反而还多了几个点出来？</p>
 <p>因此这里我们要特别注意，在使用要遵守的一条金科玉律就是：</p>
 <p><strong>不要对在你的仓库外有副本的分支执行变基！因为变基会消除原先的提交点，同时又生成新的提交点！</strong></p>
