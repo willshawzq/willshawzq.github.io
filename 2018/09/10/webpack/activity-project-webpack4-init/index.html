@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="WillShaw">
 <meta property="og:description" content="最近在做互动开发，因为是全新的域名和新的产品，原先的活动开发体系也就不能用了。借此机会我也刚好借此用webpack 4.X来重新搭建一个活动开发的项目，顺便把自己的想法实践一下。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/activity-project-webpack4-init/1.png">
-<meta property="og:updated_time" content="2018-09-11T08:42:42.147Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/1.png">
+<meta property="og:updated_time" content="2018-09-11T08:45:22.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从零构建活动项目webpack4配置(一)">
 <meta name="twitter:description" content="最近在做互动开发，因为是全新的域名和新的产品，原先的活动开发体系也就不能用了。借此机会我也刚好借此用webpack 4.X来重新搭建一个活动开发的项目，顺便把自己的想法实践一下。">
-<meta name="twitter:image" content="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/activity-project-webpack4-init/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/1.png">
 
 
 
@@ -338,7 +338,7 @@
 <p>同时每个活动会用一个单独的文件夹作为入口，一则方便代码管理，二则也同时确定了活动的访问路径。</p>
 <p>原先的运营活动PC端和WAP端页面是分放在<code>PC</code>和<code>WAP</code>两个大的分类下的，<strong>下面再按照年份和产品进行了区分</strong>。这里有一个问题就是：很多活动都是同时有<code>PC</code>和<code>WAP</code>的，两者主题的业务逻辑是一样的，不同的只有展示效果和部分交互逻辑，分放两份的话一来代码重复，而来修改问题时同时要改两个部分，这其实还是不够方便的。</p>
 <p>因此我最终的目录划分确定为：</p>
-<p><img src="/2018/09/10/webpack/activity-project-webpack4-init/./activity-project-webpack4-init/1.png" alt=""></p>
+<p><img src="/2018/09/10/webpack/activity-project-webpack4-init/1.png" alt=""></p>
 <p>每个活动目录下都会有一个<code>template</code>目录来放置重构文件，我们开发的业务逻辑将全部放置到<code>src</code>下，这样我们业务代码和重构代码就完全分离开了。每当重构文件有更新的时候，配合上公司同事开发的重构文件同步插件就能一键完成重构文件更新，同时不会影响到我们的业务代码。</p>
 <h3 id="空项目创建"><a href="#空项目创建" class="headerlink" title="空项目创建"></a>空项目创建</h3><p>第一步常规操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure></p>
 <p>初始化项目后，我们首先要安装的就是<code>webpack</code>，现在4.X版本<code>webpack-cli</code>已经独立出来了，要单独安装：<br>    yarn add -D webpack webpack-cli</p>
