@@ -503,23 +503,14 @@
 
       
         
-          
-            <p>一个只能输入数字的<code>input</code>标签，这样的需求我下意识的加上了<code>type=number</code>属性，然后飞快的实现功能逻辑就提交了。毕竟真的太寻常的需求。但是测试时才发现原来以前都有些问题，只是我一直没有发现。<br>原来这样设置之后，用户是还能够输入<code>e</code>这个字符的。</p>
-<p>数学中<code>e</code>等于2.71828！</p>
-<p>并且在科学计数法中允许字母e或E的后面，跟着一个整数，表示这个数值的指数部分：</p>
-<ol>
-<li>小数点前的数字多于21位；</li>
-<li>小数点后的零多于5个。</li>
-</ol>
-<p>因此在<code>e</code>在这种情况下是被当做数字看待的。但对于普通用户来说可能是用不上的，而且会产生疑惑，我们还是要把这个禁用掉。</p>
-<p>如果我们使用原生的HTML，我们只需做以下处理：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=<span class="string">"number"</span> onkeypress=<span class="string">"return(/[\d]/.test(String.fromCharCode(event.keyCode)))"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
-<p>在React中：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">handleKeyPress(event) &#123;</span><br><span class="line">  <span class="keyword">const</span> invalidChars = [<span class="string">'-'</span>, <span class="string">'+'</span>, <span class="string">'e'</span>, <span class="string">'.'</span>, <span class="string">'E'</span>]</span><br><span class="line">  <span class="keyword">if</span>(invalidChars.indexOf(event.key) !== <span class="number">-1</span>)&#123;</span><br><span class="line">    <span class="comment">// react中用的不是原生事件，所以return false 没用</span></span><br><span class="line">    event.preventDefault()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//render</span></span><br><span class="line">&lt;input type=<span class="string">"number"</span> onKeyPress=&#123;<span class="keyword">this</span>.handleKeyPress&#125;&gt;</span><br></pre></td></tr></table></figure></p>
-<p><strong>参考</strong></p>
-<p><a href="https://stackoverflow.com/questions/39291997/how-to-block-e-in-input-type-number" target="_blank" rel="noopener">how-to-block-e-in-input-type-number</a></p>
-<p><a href="https://math.stackexchange.com/questions/176386/why-the-number-e-2-71828-was-chosen-as-the-natural-base-for-logarithm-function" target="_blank" rel="noopener">e=2.71828</a></p>
-<p><a href="https://javascript.ruanyifeng.com/grammar/number.html" target="_blank" rel="noopener">https://javascript.ruanyifeng.com/grammar/number.html</a></p>
-
-          
+          <p>一个只能输入数字的<code>input</code>标签，这样的需求我下意识的加上了<code>type=number</code>属性，然后飞快的实现功能逻辑就提交了。毕竟真的太寻常的需求。但是测试时才发现原来以前都有些问题，只是我一直没有发现。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/16/notes/number-input-e/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
