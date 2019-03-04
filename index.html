@@ -411,6 +411,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/notes/number-input-e/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Will Shaw">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/7007063?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WillShaw">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/16/notes/number-input-e/" itemprop="url">input type=number 能输入e的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-16T17:46:07+08:00">
+                2019-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index">
+                    <span itemprop="name">HTML</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一个只能输入数字的<code>input</code>标签，这样的需求我下意识的加上了<code>type=number</code>属性，然后飞快的实现功能逻辑就提交了。毕竟真的太寻常的需求。但是测试时才发现原来以前都有些问题，只是我一直没有发现。<br>原来这样设置之后，用户是还能够输入<code>e</code>这个字符的。</p>
+<p>数学中<code>e</code>等于2.71828！</p>
+<p>并且在科学计数法中允许字母e或E的后面，跟着一个整数，表示这个数值的指数部分：</p>
+<ol>
+<li>小数点前的数字多于21位；</li>
+<li>小数点后的零多于5个。</li>
+</ol>
+<p>因此在<code>e</code>在这种情况下是被当做数字看待的。但对于普通用户来说可能是用不上的，而且会产生疑惑，我们还是要把这个禁用掉。</p>
+<p>如果我们使用原生的HTML，我们只需做以下处理：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input  type=<span class="string">"number"</span> onkeypress=<span class="string">"return(/[\d]/.test(String.fromCharCode(event.keyCode)))"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在React中：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">handleKeyPress(event) &#123;</span><br><span class="line">  <span class="keyword">const</span> invalidChars = [<span class="string">'-'</span>, <span class="string">'+'</span>, <span class="string">'e'</span>, <span class="string">'.'</span>, <span class="string">'E'</span>]</span><br><span class="line">  <span class="keyword">if</span>(invalidChars.indexOf(event.key) !== <span class="number">-1</span>)&#123;</span><br><span class="line">    <span class="comment">// react中用的不是原生事件，所以return false 没用</span></span><br><span class="line">    event.preventDefault()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//render</span></span><br><span class="line">&lt;input type=<span class="string">"number"</span> onKeyPress=&#123;<span class="keyword">this</span>.handleKeyPress&#125;&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>参考</strong></p>
+<p><a href="https://stackoverflow.com/questions/39291997/how-to-block-e-in-input-type-number" target="_blank" rel="noopener">how-to-block-e-in-input-type-number</a></p>
+<p><a href="https://math.stackexchange.com/questions/176386/why-the-number-e-2-71828-was-chosen-as-the-natural-base-for-logarithm-function" target="_blank" rel="noopener">e=2.71828</a></p>
+<p><a href="https://javascript.ruanyifeng.com/grammar/number.html" target="_blank" rel="noopener">https://javascript.ruanyifeng.com/grammar/number.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/webpack/activity-project-webpack4-init/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -822,153 +977,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/Git/1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Will Shaw">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/7007063?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WillShaw">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/17/Git/1/" itemprop="url">Git commit提交规范</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T17:46:07+08:00">
-                2018-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>目前工作中master上的提交点比较乱，同时每个提交的描述信息也没有统一的规范，提交信息乱，同时其他人无法从提交点知道该提交点具体做了哪些事情，也不利于后续跟踪功能点。</p>
-<p>这里提一点就是我们在合并我们的分支到主分支的时候一定要先检出一个新分支出来，变基然后合并到主分支！</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/17/Git/1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1023,7 +1031,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1034,7 +1042,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1045,7 +1053,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -1092,7 +1100,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
